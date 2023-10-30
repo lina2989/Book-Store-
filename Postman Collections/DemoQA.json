@@ -1,0 +1,270 @@
+{
+	"info": {
+		"_postman_id": "bff65c65-cb58-42bb-82f0-544cf451c6e1",
+		"name": "Account",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Autorization",
+			"id": "dbf21ac3-3826-42ba-93d1-7e2e0637213d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Helen\",\r\n  \"password\": \"Helen06%\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/Authorized"
+			},
+			"response": []
+		},
+		{
+			"name": "Autorization Negative",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "dadd61a0-aee0-471f-b977-342288d84062",
+						"exec": [
+							"pm.test(\"Status code is not 200\", function () {\r",
+							"    pm.response.to.have.status(404);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "22a89d9b-d8f7-41c8-8601-f0aa8f8c778a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Hele\",\r\n  \"password\": \"Helen06%\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/Authorized"
+			},
+			"response": []
+		},
+		{
+			"name": "Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1353173-9072-44f1-ad24-3631d99f7072",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"User authorized successfully.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "f8ae3ef7-98c6-423f-8480-5c58af4d1851",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Helen\",\r\n  \"password\": \"Helen06%\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/GenerateToken"
+			},
+			"response": []
+		},
+		{
+			"name": "Token Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c1353173-9072-44f1-ad24-3631d99f7072",
+						"exec": [
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"User authorized successfully.\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "08bd1777-65ce-462a-91fc-6491b39b71ab",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Ik1hcmlrIiwicGFzc3dvcmQiOiJNYXJpazI4JSIsImlhdCI6MTY5ODYwNTE1NX0.XCjqeQng_mbrzTKjuGVNz1RiTwkI4zWdwhYycp0iAGc"
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Marik\",\r\n  \"password\": \"Marik28%\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/GenerateToken"
+			},
+			"response": []
+		},
+		{
+			"name": "Create user",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c8212268-0908-4d8f-abb7-0a6f498227a5",
+						"exec": [
+							"pm.test(\"Status code isnot 200\", function () {\r",
+							"    pm.response.to.have.status(406);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"User exists!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "82b98c17-cc7c-45f9-b791-0b4c709dcc2d",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Nikita\",\r\n  \"password\": \"Nikita28%\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/User"
+			},
+			"response": []
+		},
+		{
+			"name": "Create user Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "c8212268-0908-4d8f-abb7-0a6f498227a5",
+						"exec": [
+							"pm.test(\"Status code isnot 200\", function () {\r",
+							"    pm.response.to.have.status(406);\r",
+							"});\r",
+							"pm.test(\"Body matches string\", function () {\r",
+							"    pm.expect(pm.response.text()).to.include(\"User exists!\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"id": "9768195f-5e2b-4a5f-ad40-f0646fe2a0d2",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"userName\": \"Marik\",\r\n  \"password\": \"Marik28%\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/Account/v1/User"
+			},
+			"response": []
+		},
+		{
+			"name": "Get user",
+			"id": "af011939-bd0c-4295-92cc-28d95c26661e",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Ik1hcmlrIiwicGFzc3dvcmQiOiJNYXJpazI4JSIsImlhdCI6MTY5ODYwNTE1NX0.XCjqeQng_mbrzTKjuGVNz1RiTwkI4zWdwhYycp0iAGc"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "{{baseURL}}/v1/User/3b0dac9b-74bf-4d81-a832-37680d85e93f"
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"id": "7b976505-e37d-4cf4-abb5-c65af545516f",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Ik1hcmlrIiwicGFzc3dvcmQiOiJNYXJpazI4JSIsImlhdCI6MTY5ODYwNTE1NX0.XCjqeQng_mbrzTKjuGVNz1RiTwkI4zWdwhYycp0iAGc"
+					}
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": "{{baseURL}}/Account/v1/User/3b0dac9b-74bf-4d81-a832-37680d85e93f"
+			},
+			"response": []
+		}
+	]
+}
